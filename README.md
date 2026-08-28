@@ -26,6 +26,18 @@ All through a local daemon and CLI — no headless hacks, no fragile selectors.
 
 ---
 
+## 💎 Sponsor
+
+<div align="center">
+
+[![ShareLLM](https://img.shields.io/badge/Sponsored%20by-ShareLLM-7C3AED?style=for-the-badge&labelColor=0F0F1A)](https://www.sharellm.net/)
+
+Thanks to [**ShareLLM**](https://www.sharellm.net/) for sponsoring this project!
+
+ShareLLM is a platform for **authentic AI models, verified & shared** — share your unused AI quota, or access verified models at a discount. Every model is checked for authenticity, so you never get watered-down outputs.
+
+</div>
+
 ## 🚀 What Is Omnibot?
 
 Omnibot bridges the gap between AI agents and the real web. It gives agents like **Hermes**, **Claude Code**, **Codex**, **OpenCode**, and others the ability to see and interact with a live Chromium browser — the same way a human does.
@@ -390,18 +402,6 @@ omnibot wait --text "repositories" --tab-id $TAB_ID
 # Read the results
 omnibot read --tab-id $TAB_ID
 ```
-
-## 💎 Sponsor
-
-<div align="center">
-
-[![ShareLLM](https://img.shields.io/badge/Sponsored%20by-ShareLLM-7C3AED?style=for-the-badge&labelColor=0F0F1A)](https://www.sharellm.net/)
-
-Thanks to [**ShareLLM**](https://www.sharellm.net/) for sponsoring this project!
-
-ShareLLM is a platform for **authentic AI models, verified & shared** — share your unused AI quota, or access verified models at a discount. Every model is checked for authenticity, so you never get watered-down outputs.
-
-</div>
 
 ## 📄 License
 

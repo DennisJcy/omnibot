@@ -26,6 +26,18 @@
 
 ---
 
+## 💎 赞助
+
+<div align="center">
+
+[![ShareLLM](https://img.shields.io/badge/Sponsored%20by-ShareLLM-7C3AED?style=for-the-badge&labelColor=0F0F1A)](https://www.sharellm.net/)
+
+感谢 [**ShareLLM**](https://www.sharellm.net/) 赞助本项目！
+
+ShareLLM 是一个"真实 AI 模型，验证后共享"的平台 —— 你可以分享自己闲置的 AI 额度，也可以折扣使用经过验证的模型。每个模型都会做真实性校验，杜绝"缩水版"模型。
+
+</div>
+
 ## 🚀 Omnibot 是什么？
 
 Omnibot 在 AI Agent 与真实网页之间架起桥梁，让 **Hermes**、**Claude Code**、**Codex**、**OpenCode** 等 agent 像人类一样查看并操作一个真实运行的 Chromium 浏览器。
@@ -390,18 +402,6 @@ omnibot wait --text "repositories" --tab-id $TAB_ID
 # 读取结果
 omnibot read --tab-id $TAB_ID
 ```
-
-## 💎 赞助
-
-<div align="center">
-
-[![ShareLLM](https://img.shields.io/badge/Sponsored%20by-ShareLLM-7C3AED?style=for-the-badge&labelColor=0F0F1A)](https://www.sharellm.net/)
-
-感谢 [**ShareLLM**](https://www.sharellm.net/) 赞助本项目！
-
-ShareLLM 是一个"真实 AI 模型，验证后共享"的平台 —— 你可以分享自己闲置的 AI 额度，也可以折扣使用经过验证的模型。每个模型都会做真实性校验，杜绝"缩水版"模型。
-
-</div>
 
 ## 📄 许可证
 
