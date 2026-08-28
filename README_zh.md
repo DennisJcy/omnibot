@@ -331,14 +331,16 @@ python3 build_ext.py
 
 ### 编译独立可执行文件
 
-发布用二进制由 Nuitka 编译（`--mode=standalone`，每个平台约 80–90 MB）。各平台在对应机器上编译，不做交叉编译：
+发布用二进制由 Nuitka 编译（`--mode=standalone`，每个平台约 80–90 MB），由 **GitHub Actions 流水线**（`.github/workflows/build-release.yml`）在原生 runner 上构建——无交叉编译，无远程构建机：
 
-| 平台 | 构建命令 |
-| --- | --- |
-| Linux x64 | `docker build --platform linux/amd64 -t omnibot-builder-linux -f Dockerfile .` |
-| macOS ARM64 | `./scripts/build-macos-local.sh` |
-| Windows x64 | `./scripts/build-windows-remote.sh <VERSION>`（SSH 到 Windows 构建机） |
-| 全部（Linux + macOS + 扩展） | `./scripts/build-all.sh <VERSION>` |
+| 平台 | Runner | 构建方式 |
+| --- | --- | --- |
+| Linux x64 | `ubuntu-latest` | Nuitka 原生编译 |
+| macOS ARM64 | `macos-latest`（Apple Silicon） | Nuitka 原生编译 |
+| Windows x64 | `windows-latest`（自带 MSVC） | Nuitka 原生编译 |
+| 浏览器扩展 | `ubuntu-latest` | `build_ext.py` |
+
+推送 `v*` tag 后自动构建全平台并发布 GitHub Release、npm 包和（若配置）Edge Add-ons Store 提交。
 
 完整 Nuitka 流水线与归一化步骤见 [`doc/build.md`](./doc/build.md)。
 
@@ -354,7 +356,7 @@ python3 tests/release/preflight.py
 
 ### 发布
 
-`./scripts/release.sh <VERSION>` 构建 Linux + macOS + 扩展，创建 GitHub Release，发布 npm 包（`@omniaibot/omnibot`、`@omniaibot/linux-x64`、`@omniaibot/macos-arm64`、`@omniaibot/win-x64`）以及 Edge Add-ons Store。版本号必须在全部 8 个位置保持一致（`pyproject.toml`、`cli.py` 的 fallback 版本、三个平台 `package.json`、`npm-packages/cli/package.json` 及其 `optionalDependencies`、`browser-extension/manifest.json`）。
+发布完全由 GitHub Actions 流水线（`.github/workflows/build-release.yml`）自动化：推送 `v<major>.<minor>.<patch>` tag 后，流水线自动构建全平台、创建 GitHub Release、发布 npm 包（`@omniaibot/omnibot`、`@omniaibot/linux-x64`、`@omniaibot/macos-arm64`、`@omniaibot/win-x64`），并在配置了 `EDGE_API_KEY` 时发布 Edge Add-ons Store。版本号必须在全部 8 个位置保持一致（`pyproject.toml`、`cli.py` 的 fallback 版本、三个平台 `package.json`、`npm-packages/cli/package.json` 及其 `optionalDependencies`、`browser-extension/manifest.json`）。
 
 ## 📚 文档
 

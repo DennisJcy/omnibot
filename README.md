@@ -331,14 +331,16 @@ python3 build_ext.py
 
 ### Build Standalone Binaries
 
-The published binaries are compiled with Nuitka (`--mode=standalone`, ~80–90 MB per platform). Each platform builds on its own machine — no cross-compilation:
+The published binaries are compiled with Nuitka (`--mode=standalone`, ~80–90 MB per platform) by the **GitHub Actions pipeline** (`.github/workflows/build-release.yml`) on native runners — no cross-compilation, no remote build machine:
 
-| Platform | Build Command |
-| --- | --- |
-| Linux x64 | `docker build --platform linux/amd64 -t omnibot-builder-linux -f Dockerfile .` |
-| macOS ARM64 | `./scripts/build-macos-local.sh` |
-| Windows x64 | `./scripts/build-windows-remote.sh <VERSION>` (SSH to a Windows build machine) |
-| All (Linux + macOS + extension) | `./scripts/build-all.sh <VERSION>` |
+| Platform | Runner | Build |
+| --- | --- | --- |
+| Linux x64 | `ubuntu-latest` | Nuitka native compile |
+| macOS ARM64 | `macos-latest` (Apple Silicon) | Nuitka native compile |
+| Windows x64 | `windows-latest` (MSVC preinstalled) | Nuitka native compile |
+| Browser extension | `ubuntu-latest` | `build_ext.py` |
+
+Pushing a `v*` tag automatically builds all platforms and publishes the GitHub Release, npm packages, and (if configured) the Edge Add-ons Store submission.
 
 Build docs: see [`doc/build.md`](./doc/build.md) for the full Nuitka pipeline and normalization steps.
 
@@ -354,7 +356,7 @@ python3 tests/release/preflight.py
 
 ### Release
 
-`./scripts/release.sh <VERSION>` builds Linux + macOS + the extension, creates the GitHub Release, and publishes the npm packages (`@omniaibot/omnibot`, `@omniaibot/linux-x64`, `@omniaibot/macos-arm64`, `@omniaibot/win-x64`) and the Edge Add-ons Store release. The version must be synced across all 8 locations (`pyproject.toml`, `cli.py` fallback, three platform `package.json` files, `npm-packages/cli/package.json` + its `optionalDependencies`, and `browser-extension/manifest.json`).
+Releases are fully automated by the GitHub Actions pipeline (`.github/workflows/build-release.yml`): push a `v<major>.<minor>.<patch>` tag, and the pipeline builds all platforms, creates the GitHub Release, and publishes the npm packages (`@omniaibot/omnibot`, `@omniaibot/linux-x64`, `@omniaibot/macos-arm64`, `@omniaibot/win-x64`) plus the Edge Add-ons Store release when `EDGE_API_KEY` is configured. The version must be synced across all 8 locations (`pyproject.toml`, `cli.py` fallback, three platform `package.json` files, `npm-packages/cli/package.json` + its `optionalDependencies`, and `browser-extension/manifest.json`).
 
 ## 📚 Documentation
 

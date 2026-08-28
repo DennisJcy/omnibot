@@ -216,20 +216,23 @@ python3 tests/e2e/feature_matrix_test.py --case browser_dialog_confirm_accept --
 
 ## 发布流程
 
-发布完全在本地进行，不再依赖 GitHub Actions。各平台构建方式：
+发布由 **GitHub Actions 流水线**完成（`.github/workflows/build-release.yml`）：推送 `v*` tag 后自动在 GitHub 原生 runner 上并行构建三平台二进制 + 浏览器扩展，并发布 GitHub Release、npm 包和（可选）Edge Add-ons Store。不需要任何本地构建脚本或远程构建机器。
 
-| 平台 | 构建方式 | 脚本 |
-|------|---------|------|
-| Linux x64 | Docker 本地编译 | `Dockerfile` |
-| macOS ARM64 | 本地 Nuitka 编译 | `scripts/build-macos-local.sh` |
-| Windows x64 | 远程 Windows 机器 SSH 编译 | `scripts/build-windows-remote.sh` |
-| Extension | 本地 `build_ext.py` | — |
+| 平台 | runner | 构建方式 |
+|------|--------|---------|
+| Linux x64 | `ubuntu-latest` | Nuitka 原生编译 |
+| macOS ARM64 | `macos-latest`（Apple Silicon） | Nuitka 原生编译 |
+| Windows x64 | `windows-latest`（自带 MSVC） | Nuitka 原生编译 |
+| Extension | `ubuntu-latest` | `build_ext.py` |
 
-**为什么 Windows 不用 Docker？**
-- Nuitka 不支持 Linux→Windows 原生交叉编译（`--mingw64` 在 Linux 上被忽略）
-- Wine 8.0 缺少 `CopyFile2` API（Python 3.13 pip 需要）
-- Wine 9.x 在 QEMU x86_64 模拟下崩溃（`anon_mmap_fixed` 断言）
-- Windows 容器只能运行在 Windows 主机上，macOS Docker Desktop 不支持
+**为什么用 GitHub runner 而不是 Docker/远程机器？**
+- `windows-latest` 自带 MSVC 工具链，Nuitka 可直接编译 Windows 二进制——此前本地没有 Windows 环境，才需要远程 SSH 构建机（`build-windows-remote.sh` 已删除）
+- `macos-latest` 是 Apple Silicon 原生 runner，直接产出 ARM64 二进制
+- 发布流程不再依赖任何内网 IP / SSH 凭据
+
+**发布所需 secrets（仓库 Settings → Secrets and variables → Actions）：**
+- `NPM_TOKEN` — npm 发布令牌，必须有 `@omniaibot/*` scope 的 publish 权限（bypass-2FA 的 Granular Access Token 可以发布）
+- `EDGE_API_KEY` / `EDGE_PRODUCT_ID` / `EDGE_CLIENT_ID` —（可选）Edge Add-ons Store 发布；不配置则 CI 跳过 Edge 发布
 
 ### 版本号规则
 
@@ -269,12 +272,12 @@ git tag v1.6.8
 git push origin v1.6.8
 ```
 
-Tag 必须以 `v` 开头，后面跟 semver 版本号。`release.sh` 会去掉 `v` 前缀作为 npm 包版本。
+Tag 必须以 `v` 开头，后面跟 semver 版本号。CI 会去掉 `v` 前缀作为 npm/VERSION 版本。
 
 ### 完整发布步骤
 
 **Step 1: 版本 bump**
-更新所有 8 个版本号位置到新版本。
+更新所有 8 个版本号位置到新版本，并运行 `uv lock` 同步 `uv.lock`。
 
 **Step 2: 发版前测试**
 ```bash
@@ -291,61 +294,29 @@ git tag v1.6.8
 git push origin master --tags
 ```
 
-**Step 4: 构建 Linux + macOS + Extension 并发布**
-```bash
-./scripts/release.sh 1.6.8
-```
+**Step 4: CI 自动完成（无需本地操作）**
 
-该脚本自动完成：
-1. 验证版本号一致性
-2. Docker 编译 Linux x64
-3. 本地编译 macOS ARM64
-4. 编译浏览器扩展
-5. 创建 GitHub Release 并上传 Linux/macOS/Extension/Windows zip
-6. 发布 npm 包（`@omniaibot/omnibot`、`@omniaibot/linux-x64`、`@omniaibot/macos-arm64`、`@omniaibot/win-x64`）
-7. 发布扩展到 Edge Add-ons Store（需要设置 `EDGE_API_KEY` 环境变量）
+推送 tag 后 `.github/workflows/build-release.yml` 自动执行：
+1. 并行构建 Linux / macOS / Windows 二进制 + 浏览器扩展（4 个独立 job）
+2. 创建 GitHub Release 并上传 4 个 zip（extension/linux/macos/windows）
+3. 校验 npm 包版本与 tag 一致（不一致则中止）
+4. 发布 npm 包（`@omniaibot/omnibot`、`@omniaibot/linux-x64`、`@omniaibot/macos-arm64`、`@omniaibot/win-x64`）
+5. 配置了 `EDGE_API_KEY` 时发布到 Edge Add-ons Store
+
+发布失败排查：打开仓库 Actions 页面查看对应 job 日志。npm 发布失败最常见原因是版本号与 tag 不一致（Step 1 漏改某处）；构建失败常见于 Nuitka 版本变更，查看 `pip install nuitka` 是否升级了不兼容版本。
 
 **Edge Add-ons Store 自动发布：**
 
-`release.sh` 会自动发布扩展到 Microsoft Edge Add-ons Store，需要设置环境变量：
+CI 的 release job 会在配置了 `EDGE_API_KEY` / `EDGE_PRODUCT_ID` / `EDGE_CLIENT_ID` secrets 时自动发布扩展到 Edge Add-ons Store。也可以本地单独运行：
 
 ```bash
-export EDGE_API_KEY="your-api-key"
-./scripts/release.sh 1.6.8
-```
-
-也可以单独运行 Edge 发布脚本：
-
-```bash
-EDGE_API_KEY="your-api-key" ./scripts/publish-edge-extension.sh /tmp/omnibot-extension.zip
+EDGE_API_KEY="your-api-key" EDGE_PRODUCT_ID="..." EDGE_CLIENT_ID="..." ./scripts/publish-edge-extension.sh /tmp/omnibot-extension.zip
 ```
 
 Edge Add-ons API 配置：
-- **Product ID / Client ID**: 通过环境变量 `EDGE_PRODUCT_ID` / `EDGE_CLIENT_ID` 传入（见 `scripts/publish-edge-extension.sh`），从 Partner Center 获取
+- **Product ID / Client ID**: 从 Partner Center 获取
 - **API Key**: 从 Partner Center 获取（需要定期更新）
 - **API 文档**: https://learn.microsoft.com/en-us/microsoft-edge/extensions/update/api/using-addons-api
-
-**Step 5: 构建 Windows 并发布**
-```bash
-./scripts/build-windows-remote.sh 1.6.8
-```
-
-该脚本自动完成：
-1. 打包源码并传输到远程 Windows 机器（通过 `WIN_HOST` 环境变量指定）
-2. 在远程机器上创建 Python 3.13 venv 并安装依赖
-3. 运行 Nuitka 编译
-4. Normalize 输出并同步 VERSION/skills
-5. 打包回传到本地
-
-然后手动发布 Windows 包：
-```bash
-# 上传到 GitHub Release
-(cd npm-packages/win-x64/bin && zip -r /tmp/omnibot-windows-x64.zip omnibot-windows-x64)
-gh release upload v1.6.8 /tmp/omnibot-windows-x64.zip --clobber
-
-# 发布到 npm
-npm publish npm-packages/win-x64/ --access public
-```
 
 **发布后验证：**
 ```bash
@@ -357,84 +328,27 @@ npm install -g @omniaibot/omnibot@1.6.8
 $(npm prefix -g)/bin/omnibot --help
 ```
 
-### Windows 构建注意事项
+### 发布注意事项
 
-**⚠️ 重要：Windows 构建必须在 `release.sh` 之前完成**
+1. **npm 不允许覆盖已发布版本**：如果发布了错误内容（如旧二进制），不能通过 `npm unpublish` + `npm publish` 同一版本号来修复。必须 bump 到下一个版本（如 1.6.8 → 1.6.9）重新发布。npm 新政策还禁止 bypass-2FA 令牌执行 unpublish，撤回发布只能 deprecate 标记废弃。
 
-`release.sh` 会检测 `npm-packages/win-x64/bin/omnibot-windows-x64/` 是否已有构建产物。如果该目录不存在或为空，`release.sh` 会跳过 Windows 包的发布。
+2. **目录命名不一致**：npm 包名是 `@omniaibot/win-x64`，但实际产物目录名是 `omnibot-windows-x64`（不是 `omnibot-win-x64`）。CI 的 normalize 与解压逻辑已统一此命名。
 
-**正确的发布顺序：**
+3. **Nuitka + Python 3.13 + Windows UnicodeDecodeError**：`scripts/patch_nuitka_windows.py` 会把 metadata 访问包在 try-except 中。CI 的 Windows job 每次构建前自动执行此 patch。
 
-```bash
-# 1. 先构建 Windows 二进制
-./scripts/build-windows-remote.sh 1.6.8
-
-# 2. 验证 Windows 二进制版本
-cat npm-packages/win-x64/bin/omnibot-windows-x64/VERSION
-# 应该输出: 1.6.8
-
-# 3. 再运行 release.sh（会检测并使用已构建的 Windows 产物）
-./scripts/release.sh 1.6.8
-```
-
-**常见陷阱：**
-
-1. **VERSION 文件不匹配**：如果 `dist/release/omnibot-windows-x64/VERSION` 是旧版本，`release.sh` 会复制错误的二进制。解决方法：先运行 `build-windows-remote.sh`，它会输出到 `npm-packages/win-x64/bin/`，`release.sh` 会优先使用该目录。
-
-2. **npm 不允许覆盖已发布版本**：如果发布了错误的 Windows 二进制（如旧版本），不能通过 `npm unpublish` + `npm publish` 同一版本号来修复。必须 bump 到下一个版本（如 1.6.8 → 1.6.9）重新发布。
-
-3. **目录命名不一致**：npm 包名是 `@omniaibot/win-x64`，但实际目录名是 `omnibot-windows-x64`（不是 `omnibot-win-x64`）。`release.sh` 已修复此路径检测逻辑。
+4. **二进制污染检查**（发布前人工确认可选）：`strings <二进制> | grep -i license` 应无输出——此前出现过远程构建机残留旧模块被 Nuitka 编入二进制的问题；CI 从干净 checkout 构建不会遇到。
 
 ### 构建基础设施
 
-**`Dockerfile`** — Linux x64 原生编译容器。
-```bash
-docker build --platform linux/amd64 -t omnibot-builder-linux -f Dockerfile .
-```
+**`.github/workflows/build-release.yml`** — 发布流水线（三平台构建 + 扩展 + GitHub Release + npm + Edge）。
 
-**`Dockerfile.windows`** — 仅文档用途，说明为什么 Docker 无法编译 Windows。
-```bash
-# 此文件不可用于实际构建，仅记录 Wine 方案的失败原因
-cat Dockerfile.windows
-```
+**`scripts/normalize_nuitka_standalone.py`** — 归一化 Nuitka 产物：重命名二进制、写 VERSION 文件、整理目录。CI 三个平台 job 均使用。
 
-**`scripts/build-all.sh`** — 编排 Linux + macOS + Extension 构建（不含 Windows）。
-```bash
-./scripts/build-all.sh [VERSION]
-```
+**`scripts/patch_nuitka_windows.py`** — 修复 Windows 上 Nuitka 的 UnicodeDecodeError，CI Windows job 自动执行。
 
-**`scripts/build-macos-local.sh`** — 本地 macOS ARM64 构建。
-```bash
-./scripts/build-macos-local.sh          # 构建 + 上传到 GitHub Release
-./scripts/build-macos-local.sh --build-only  # 仅构建
-```
+**`scripts/publish-edge-extension.sh`** — Edge Add-ons Store 发布脚本（CI 可选步骤，也可本地单独运行）。
 
-**`scripts/build-windows-remote.sh`** — 远程 Windows 机器构建。
-```bash
-./scripts/build-windows-remote.sh [VERSION]
-# 环境变量：
-#   WIN_HOST     — 远程 Windows SSH 主机（通过环境变量设置，如 user@your-windows-host）
-#   WIN_PROJECT  — 远程项目目录（可选，默认 C:\Users\<user>\project\omnibot_src）
-```
+**`build_ext.py`** — 浏览器扩展打包（CI 与本地开发通用，输出 `dist/omnibot/`）。
 
-**`scripts/release.sh`** — 完整发布脚本（构建 Linux + macOS + Extension + GitHub Release + npm publish）。
-```bash
-./scripts/release.sh <VERSION>
-```
-
-### Windows 远程构建环境
-
-远程 Windows 机器配置（通过环境变量 `WIN_HOST` 等指定，见 `scripts/build-windows-remote.sh`）：
-- **Python**: 3.13（通过 uv 管理）
-- **构建工具**: Git, uv, MSVC (cl.exe)
-
-**已知问题：Nuitka + Python 3.13 + Windows UnicodeDecodeError**
-
-修复脚本 `scripts/patch_nuitka_windows.py` 会将 metadata 访问包在 try-except 中。每次创建新的 Windows venv 后必须执行一次：
-
-```powershell
-.venv313\Scripts\python.exe scripts\patch_nuitka_windows.py
-```
-
-`build-windows-remote.sh` 会自动执行此 patch。
+**`scripts/publish.sh`** — PyPI 发布（独立用途，与 GitHub/npm 发布无关）。
 
