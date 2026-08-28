@@ -60,7 +60,7 @@ tar czf "$TARBALL" \
 
 # 2. Transfer source to remote Windows
 echo "==> Transferring source to $WIN_HOST..."
-ssh "$WIN_HOST" "mkdir \"$WIN_PROJECT\" 2>nul & echo ok" 2>&1
+ssh "$WIN_HOST" "rmdir /s /q \"$WIN_PROJECT\" 2>nul & mkdir \"$WIN_PROJECT\" & echo ok" 2>&1
 scp "$TARBALL" "$WIN_HOST:/tmp/omnibot-src.tar.gz"
 
 # 3. Extract and clean AppleDouble files on remote
