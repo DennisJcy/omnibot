@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Agent PushState Probe</title></head>
+<body>
+  <h1>PushState Probe</h1>
+  <div id="status">path=<script>document.write(location.pathname + location.search)</script></div>
+  <script>
+    const status = document.querySelector('#status');
+    const render = () => { status.textContent = 'path=' + location.pathname + location.search + '; popstate=' + (window.__popstateCount || 0); };
+    window.addEventListener('popstate', () => { window.__popstateCount = (window.__popstateCount || 0) + 1; render(); });
+    render();
+  </script>
+</body>
+</html>

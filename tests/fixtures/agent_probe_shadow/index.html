@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head><meta charset="utf-8"><title>Closed Shadow Probe</title></head>
+  <body>
+    <h1>Closed Shadow Probe</h1>
+    <closed-action></closed-action>
+    <div id="status">idle</div>
+    <script>
+      class ClosedAction extends HTMLElement {
+        constructor() {
+          super();
+          const root = this.attachShadow({mode: 'closed'});
+          const button = document.createElement('button');
+          button.textContent = 'Shadow action';
+          button.addEventListener('click', () => {
+            document.querySelector('#status').textContent = 'shadow-clicked';
+          });
+          root.append(button);
+        }
+      }
+      customElements.define('closed-action', ClosedAction);
+    </script>
+  </body>
+</html>

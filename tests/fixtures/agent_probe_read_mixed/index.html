@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <base href="/base/">
+    <title>Mixed Read Links</title>
+  </head>
+  <body>
+    <main>
+      <h1>Mixed Read Links</h1>
+      <p>Choose a real destination from the extracted links.</p>
+      <div class="wrapped">
+        <a href="topic.html?x=1&amp;y=two#part">Base Topic</a>
+      </div>
+      <section>
+        <a href="../docs/parent.html?name=a%20b">Parent Docs</a>
+      </section>
+      <a href="/docs/root.html?next=%2Fhome#root">Root Docs</a>
+      <a href="mailto:test@example.com">Not a browser destination</a>
+      <a href="javascript:void(0)">Not executable</a>
+      <p id="dynamic-slot">waiting for dynamic link</p>
+    </main>
+    <script>
+      setTimeout(() => {
+        const link = document.createElement('a');
+        link.href = 'dynamic/final.html?from=runtime';
+        link.textContent = 'Dynamic Final';
+        document.getElementById('dynamic-slot').replaceChildren(link);
+      }, 500);
+    </script>
+  </body>
+</html>

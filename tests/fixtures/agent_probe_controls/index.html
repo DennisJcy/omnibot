@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Agent Controls Probe</title>
+  <style>
+    body { font-family: sans-serif; margin: 32px; }
+    label, button { display: block; margin: 12px 0; }
+    #dropzone { width: 220px; height: 80px; border: 2px dashed #777; display: grid; place-items: center; margin-top: 16px; }
+    #drag-source { width: 120px; padding: 8px; background: #e8f0ff; border: 1px solid #558; cursor: grab; }
+    #status { margin-top: 20px; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <h1>Agent Controls Probe</h1>
+  <label>Email <input id="email" aria-label="Email" placeholder="email"></label>
+  <label>Mode
+    <select id="mode" aria-label="Mode">
+      <option value="alpha">Alpha</option>
+      <option value="beta">Beta</option>
+      <option value="gamma">Gamma</option>
+    </select>
+  </label>
+  <label><input id="agree" type="checkbox"> I agree to automation testing</label>
+  <label>Upload file <input id="upload" aria-label="Upload file" type="file"></label>
+  <button id="save">Save controls</button>
+  <button id="keyboard">Keyboard target</button>
+  <div id="drag-source" draggable="true">Drag token</div>
+  <div id="dropzone">Drop here</div>
+  <div id="status">idle</div>
+  <script>
+    const state = {
+      email: '',
+      mode: 'alpha',
+      agreed: false,
+      uploadName: '',
+      keyboard: '',
+      dropped: false
+    };
+    const status = document.getElementById('status');
+    const render = () => {
+      status.textContent = [
+        `email=${state.email || '-'}`,
+        `mode=${state.mode}`,
+        `agreed=${state.agreed}`,
+        `upload=${state.uploadName || '-'}`,
+        `keyboard=${state.keyboard || '-'}`,
+        `dropped=${state.dropped}`
+      ].join('; ');
+    };
+    document.getElementById('save').addEventListener('click', () => {
+      state.email = document.getElementById('email').value;
+      state.mode = document.getElementById('mode').value;
+      state.agreed = document.getElementById('agree').checked;
+      render();
+    });
+    document.getElementById('upload').addEventListener('change', (event) => {
+      state.uploadName = event.target.files && event.target.files[0] ? event.target.files[0].name : '';
+      render();
+    });
+    document.getElementById('keyboard').addEventListener('click', () => {
+      state.keyboard = '';
+      status.textContent = 'keyboard ready';
+      document.body.focus();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key.length === 1) state.keyboard += event.key;
+      if (event.key === 'Enter') render();
+    });
+    document.getElementById('drag-source').addEventListener('dragstart', (event) => {
+      event.dataTransfer.setData('text/plain', 'drag-token');
+    });
+    const dropzone = document.getElementById('dropzone');
+    dropzone.addEventListener('dragover', (event) => event.preventDefault());
+    dropzone.addEventListener('drop', (event) => {
+      event.preventDefault();
+      state.dropped = event.dataTransfer.getData('text/plain') === 'drag-token';
+      render();
+    });
+    render();
+  </script>
+</body>
+</html>

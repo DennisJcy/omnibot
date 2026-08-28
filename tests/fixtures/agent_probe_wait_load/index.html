@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Wait Load Probe</title>
+    <script>
+      window.addEventListener('load', () => {
+        document.documentElement.setAttribute('data-loaded', 'true');
+        document.getElementById('status').textContent = 'loaded';
+        setTimeout(() => {
+          document.getElementById('status').textContent = 'delayed ready';
+          document.documentElement.setAttribute('data-delayed-ready', 'true');
+        }, 800);
+      });
+    </script>
+  </head>
+  <body>
+    <main>
+      <h1>Wait Load Probe</h1>
+      <p id="status">booting</p>
+    </main>
+  </body>
+</html>

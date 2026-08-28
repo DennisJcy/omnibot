@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "omnibot"
+version = "1.6.22"
+description = "Local CLI browser automation system that connects agents to a real browser through the omnibot companion extension."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Unagi-cq" },
+]
+keywords = ["mcp", "browser", "automation", "omnibot"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Framework :: AsyncIO",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP :: Browsers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "beautifulsoup4>=4.14.3",
+    "bottle>=0.13.4",
+    "cryptography>=42.0.0",
+    "prompt_toolkit>=3.0.0",
+    "requests>=2.33.1",
+    "simple-websocket-server>=0.4.4",
+]
+
+[project.scripts]
+omnibot = "omnibot:main"
+
+[project.urls]
+Homepage = "https://github.com/DennisJcy/omnibot"
+Repository = "https://github.com/DennisJcy/omnibot"
+Documentation = "https://github.com/DennisJcy/omnibot/blob/main/README.md"
+Issues = "https://github.com/DennisJcy/omnibot/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["omnibot", "omnibot.*"]
+
+[tool.setuptools.package-data]
+omnibot = ["sop/*.md", "skills/*/SKILL.md", "skills/*/references/*.md"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pyinstaller>=6.0",
+    "nuitka>=2.6",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests/unit"]
+python_files = ["test_*.py"]

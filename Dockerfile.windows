@@ -1,0 +1,16 @@
+# Dockerfile.windows — Windows x64 build via remote Windows machine
+#
+# NOTE: Nuitka does NOT support native cross-compilation from Linux to Windows.
+# The --mingw64 flag is silently ignored on Linux. Wine-based approaches also
+# fail because:
+#   - Wine 8.0 lacks CopyFile2 (needed by Python 3.13 pip)
+#   - Wine 9.x crashes under QEMU x86_64 emulation on Apple Silicon
+#   - Windows containers only run on Windows hosts
+#
+# Windows binaries MUST be built on a real Windows machine. Use the remote
+# Windows build script instead:
+#
+#   ./scripts/build-windows-remote.sh [VERSION]
+#
+# This file is kept for documentation purposes. There is no Docker-based
+# Windows cross-compilation path.

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Remote Payment Frame</title>
+</head>
+<body>
+  <main>
+    <h2>Remote Payment Frame</h2>
+    <label for="remote-frame-code">Remote frame code</label>
+    <input id="remote-frame-code" name="remote-frame-code" placeholder="Remote frame code">
+    <button id="remote-frame-submit" type="button">Submit remote frame</button>
+    <p id="remote-frame-status">remote frame idle</p>
+  </main>
+  <script>
+    document.querySelector('#remote-frame-submit').addEventListener('click', () => {
+      const value = document.querySelector('#remote-frame-code').value;
+      document.querySelector('#remote-frame-status').textContent = `remote frame submitted ${value}`;
+      parent.postMessage({type: 'remote-frame-submit', value}, 'http://127.0.0.1:64330');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Frame Probe Child</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        margin: 20px;
+      }
+      label,
+      button,
+      output {
+        display: block;
+        margin-top: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Payment Frame</h2>
+    <label>
+      Frame code
+      <input id="frame-code" name="frame-code" autocomplete="off">
+    </label>
+    <button id="submit-frame">Submit frame</button>
+    <output id="frame-status">frame idle</output>
+    <script>
+      document.querySelector("#submit-frame").addEventListener("click", () => {
+        const value = document.querySelector("#frame-code").value;
+        document.querySelector("#frame-status").textContent = `frame submitted ${value}`;
+        parent.postMessage({ type: "frame-probe", value }, "*");
+      });
+    </script>
+  </body>
+</html>

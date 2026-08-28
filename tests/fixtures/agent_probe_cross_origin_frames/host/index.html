@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Cross Origin Frame Host</title>
+</head>
+<body>
+  <main>
+    <h1>Cross Origin Frame Host</h1>
+    <p id="host-status">host idle</p>
+    <iframe
+      id="remote-payment-frame"
+      name="remote-payment-frame"
+      title="Remote Payment Frame"
+      src="http://127.0.0.1:64331/child.html"
+      width="420"
+      height="220"></iframe>
+  </main>
+  <script>
+    window.addEventListener('message', (event) => {
+      if (!event.data || event.data.type !== 'remote-frame-submit') return;
+      document.querySelector('#host-status').textContent = `host received ${event.data.value}`;
+    });
+  </script>
+</body>
+</html>

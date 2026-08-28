@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:380px;overflow:hidden}
+body{display:flex;padding:12px;background:#f5f6f8;color:#1a1a2e;font:13px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+.shell{display:flex;flex:1;flex-direction:column;border:1px solid rgba(0,0,0,.06);border-radius:14px;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.08);overflow:hidden}
+.header{display:flex;align-items:center;gap:10px;padding:14px 16px 12px;border-bottom:1px solid rgba(0,0,0,.05)}
+.icon{width:32px;height:32px;border-radius:8px;object-fit:contain;flex-shrink:0}
+h1{font-size:15px;font-weight:650;line-height:1.2}
+.subtitle{font-size:11px;color:#888;margin-top:1px}
+.header-right{margin-left:auto;display:flex;align-items:center;gap:6px}
+.lang-select{height:24px;border:1px solid rgba(0,0,0,.12);border-radius:5px;font:500 11px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#555;background:#f8f9fa;cursor:pointer;padding:0 4px}
+.lang-select:focus{outline:none;border-color:#4f46e5}
+.version{font-size:11px;color:#aaa;font-weight:500}
+.section{padding:12px 16px;border-bottom:1px solid rgba(0,0,0,.05)}
+.conn{display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot.on{background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.15)}
+.dot.off{background:#ef4444;box-shadow:0 0 0 3px rgba(239,68,68,.15)}
+.dot.wait{background:#f59e0b;box-shadow:0 0 0 3px rgba(245,158,11,.15)}
+.conn-text{font-size:12px;color:#555}
+.port{margin-left:auto;font-size:11px;color:#999;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.label{font-size:11px;color:#888;margin-bottom:4px;font-weight:500}
+.btn{height:30px;border:0;border-radius:7px;padding:0 14px;font:600 12px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;transition:all .15s}
+.btn-primary{background:#4f46e5;color:#fff}
+.btn-primary:hover{background:#4338ca;box-shadow:0 4px 12px rgba(79,70,229,.25)}
+.btn-secondary{background:#f1f5f9;color:#475569}
+.btn-secondary:hover{background:#e2e8f0}
+.footer{display:flex;gap:8px;padding:10px 16px 12px}
+.footer .btn{flex:1;text-align:center}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="header">
+    <svg class="icon" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="ring" x1="96" y1="80" x2="416" y2="448">
+          <stop offset="0%" stop-color="#1E293B"/>
+          <stop offset="100%" stop-color="#0F172A"/>
+        </linearGradient>
+        <linearGradient id="blue" x1="256" y1="176" x2="256" y2="456">
+          <stop offset="0%" stop-color="#5B7CFF"/>
+          <stop offset="100%" stop-color="#2554FF"/>
+        </linearGradient>
+      </defs>
+      <path d="M164 406 A176 176 0 1 1 348 406" stroke="url(#ring)" stroke-width="72" stroke-linecap="round"/>
+      <circle cx="256" cy="184" r="28" fill="url(#blue)"/>
+      <rect x="230" y="228" width="52" height="228" rx="26" fill="url(#blue)"/>
+    </svg>
+    <div>
+      <h1>omnibot</h1>
+      <div class="subtitle" id="subtitle" data-i18n="ext_subtitle"></div>
+    </div>
+    <div class="header-right">
+      <select class="lang-select" id="langSelect">
+        <option value="zh_CN">中文</option>
+        <option value="en">English</option>
+      </select>
+      <span class="version" id="version"></span>
+    </div>
+  </div>
+  <div class="section">
+    <div class="conn">
+      <span class="dot off" id="dot"></span>
+      <span class="conn-text" id="connText" data-i18n="disconnected"></span>
+      <span class="port" id="portDisplay">--</span>
+    </div>
+  </div>
+  <div class="footer">
+    <button class="btn btn-secondary" id="reconnectBtn" data-i18n="reconnect"></button>
+    <button class="btn btn-secondary" id="helpBtn" data-i18n="help_docs"></button>
+  </div>
+</div>
+<script src="popup.js"></script>
+</body>
+</html>

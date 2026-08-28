@@ -1,0 +1,26 @@
+{
+  "name": "@omniaibot/omnibot",
+  "version": "1.6.22",
+  "description": "omnibot CLI and local daemon for real-browser AI agent automation",
+  "bin": {
+    "omnibot": "bin/omnibot.js"
+  },
+  "optionalDependencies": {
+    "@omniaibot/linux-x64": "1.6.22",
+    "@omniaibot/macos-arm64": "1.6.22",
+    "@omniaibot/win-x64": "1.6.22"
+  },
+  "keywords": [
+    "browser",
+    "automation",
+    "cli",
+    "agent",
+    "omnibot"
+  ],
+  "author": "Unagi-cq",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DennisJcy/omnibot.git"
+  }
+}

@@ -1,0 +1,23 @@
+/dist/
+/build/
+/.venv/
+/src/omnibot.egg-info/
+/.worktrees/
+/.idea/
+*.pyc
+.DS_Store
+npm-packages/*/bin/
+
+# Test reports
+tests/reports/*
+!tests/reports/.gitkeep
+!tests/reports/.gitignore
+*.tgz
+# Private keys / local secrets
+omnibot.pem
+omnibrowse.pem
+*.pem
+
+# Local agent working dirs (private)
+.zcode/
+.opencode/

@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Agent Wait Hidden Probe</title></head>
+<body>
+  <button id="hide">Hide target</button>
+  <div id="target">Visible target</div>
+  <div id="status">visible</div>
+  <script>
+    document.querySelector('#hide').addEventListener('click', () => {
+      document.querySelector('#target').hidden = true;
+      document.querySelector('#status').textContent = 'hidden';
+    });
+  </script>
+</body>
+</html>

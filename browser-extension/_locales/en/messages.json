@@ -1,0 +1,137 @@
+{
+  "ext_name": {
+    "message": "omnibot"
+  },
+  "ext_description": {
+    "message": "LLM Browser Automation"
+  },
+  "ext_subtitle": {
+    "message": "LLM Browser Automation"
+  },
+  "connected": {
+    "message": "Connected"
+  },
+  "disconnected": {
+    "message": "Disconnected"
+  },
+  "port_label": {
+    "message": "Port $port$",
+    "placeholders": {
+      "port": {
+        "content": "$1"
+      }
+    }
+  },
+  "reconnect": {
+    "message": "🔄 Reconnect"
+  },
+  "help_docs": {
+    "message": "? Help"
+  },
+  "err_comm_failed": {
+    "message": "Communication failed"
+  },
+  "lang_label": {
+    "message": "Language"
+  },
+  "help_title": {
+    "message": "omnibot Help"
+  },
+  "help_intro": {
+    "message": "LLM browser automation assistant that lets AI control your browser to accomplish various tasks. omnibot connects LLM clients to your real browser through a local CLI service, enabling web browsing, data extraction, form filling, and other automation operations."
+  },
+  "help_official_site": {
+    "message": "Official website: "
+  },
+  "help_toc": {
+    "message": "Contents"
+  },
+  "help_quick_start": {
+    "message": "Quick Start"
+  },
+  "help_install_cli": {
+    "message": "1. Install CLI Service"
+  },
+  "help_install_cli_desc": {
+    "message": "omnibot runs as a local CLI service that LLM clients start automatically. Install the npm package (auto-detects platform):"
+  },
+  "help_install_cli_tip": {
+    "message": "After installation, use the omnibot command to start the service. Use omnibot doctor to check service status."
+  },
+  "help_install_ext": {
+    "message": "2. Install Browser Extension"
+  },
+  "help_install_ext_desc": {
+    "message": "If you are reading this help document, the browser extension is already installed. If not, install it from the Chrome Web Store."
+  },
+  "help_install_skills": {
+    "message": "4. Install Agent Skills"
+  },
+  "help_install_skills_desc": {
+    "message": "omnibot provides browser operation capabilities to different agents through skills. After installing the CLI service, use the omnibot skills install command to install skills for your agent:"
+  },
+  "help_skills_tip": {
+    "message": "After installing skills, the agent will automatically gain browser page reading, clicking, navigation, and other operation capabilities without additional configuration."
+  },
+  "help_skill_install_title": {
+    "message": "$agent$ Skill Installation",
+    "placeholders": {
+      "agent": {
+        "content": "$1"
+      }
+    }
+  },
+  "help_hermes_profile_note": {
+    "message": "You need to specify a profile (use hermes profile list to see available profiles):"
+  },
+  "help_openclaw_note": {
+    "message": "Skills will be installed to ~/.openclaw/skills/ and auto-loaded when OpenClaw starts."
+  },
+  "help_workbuddy_note": {
+    "message": "Skills will be installed to ~/.workbuddy/skills/. Start WorkBuddy to use browser automation capabilities."
+  },
+  "help_trae_note": {
+    "message": "Skills will be installed to ~/.trae/skills/ (international) or ~/.trae-cn/skills/ (China), auto-loaded when Trae starts."
+  },
+  "help_skill_auto_load": {
+    "message": "After installation, $agent$ will automatically load the omnibot skill and gain browser automation capabilities.",
+    "placeholders": {
+      "agent": {
+        "content": "$1"
+      }
+    }
+  },
+  "help_connection_title": {
+    "message": "Connection Status"
+  },
+  "help_connection_desc": {
+    "message": "The connection status is shown at the top of the popup:"
+  },
+  "help_conn_green": {
+    "message": "🟢 Connected — Extension is properly connected to the CLI service"
+  },
+  "help_conn_red": {
+    "message": "🔴 Disconnected — CLI service is not running or port is unreachable"
+  },
+  "help_conn_troubleshoot": {
+    "message": "If disconnected, ensure the CLI service is running, then click Reconnect."
+  },
+  "help_faq_title": {
+    "message": "FAQ"
+  },
+  "help_faq_q1": {
+    "message": "Q: Extension shows \"Disconnected\"?"
+  },
+  "help_faq_a1": {
+    "message": "A: Ensure the CLI service is running. Run omnibot doctor to check status, wait for the service to start, then click \"Reconnect\"."
+  },
+  "help_faq_q4": {
+    "message": "Q: What happens after trial expires?"
+  },
+  "help_faq_q2": {
+    "message": "Q: Which browsers are supported?"
+  },
+  "help_faq_a2": {
+    "message": "A: Chromium-based browsers (Chrome, Edge, Brave, etc.)."
+  }
+}

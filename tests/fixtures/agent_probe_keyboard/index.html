@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Agent Keyboard Probe</title></head>
+<body>
+  <h1>Keyboard Probe</h1>
+  <input id="target" aria-label="Keyboard target" autocomplete="off">
+  <button id="reset">Reset events</button>
+  <div id="status">idle</div>
+  <script>
+    const input = document.querySelector('#target');
+    const status = document.querySelector('#status');
+    const events = [];
+    const render = () => status.textContent = 'value=' + input.value + '; events=' + events.join(',');
+    document.addEventListener('keydown', (event) => { events.push('down:' + event.key); render(); });
+    document.addEventListener('keyup', (event) => { events.push('up:' + event.key); render(); });
+    document.addEventListener('input', () => { events.push('input'); render(); });
+    document.querySelector('#reset').addEventListener('click', () => { events.length = 0; input.value = ''; render(); });
+    render();
+  </script>
+</body>
+</html>

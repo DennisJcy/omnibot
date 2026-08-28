@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Agent Reload Probe</title></head>
+<body>
+  <h1>Agent Reload Probe</h1>
+  <p id="status">booting</p>
+  <script>
+    const count = Number(sessionStorage.getItem('agent-reload-count') || '0') + 1;
+    sessionStorage.setItem('agent-reload-count', String(count));
+    document.getElementById('status').textContent = `reload-count=${count}`;
+  </script>
+</body>
+</html>

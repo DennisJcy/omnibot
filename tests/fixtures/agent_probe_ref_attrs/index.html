@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ref Attribute Probe</title>
+  </head>
+  <body>
+    <main>
+      <h1>Ref Attribute Probe</h1>
+      <a id="target-link" data-tracking-id="link-42" href="./target.html?source=ref#details">Inspect target link</a>
+      <button id="status-button" data-action="mark-ready">Mark ready</button>
+      <p id="status">ready</p>
+      <script>
+        document.getElementById('status-button').addEventListener('click', () => {
+          document.getElementById('status').textContent = 'clicked';
+        });
+      </script>
+    </main>
+  </body>
+</html>

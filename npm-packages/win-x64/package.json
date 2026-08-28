@@ -1,0 +1,29 @@
+{
+  "name": "@omniaibot/win-x64",
+  "version": "1.6.22",
+  "description": "omnibot executable for Windows x64",
+  "os": [
+    "win32"
+  ],
+  "cpu": [
+    "x64"
+  ],
+  "bin": {
+    "omnibot": "bin/omnibot-windows-x64/omnibot-windows-x64.exe"
+  },
+  "files": [
+    "bin/"
+  ],
+  "keywords": [
+    "browser",
+    "automation",
+    "agent",
+    "omnibot"
+  ],
+  "author": "Unagi-cq",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DennisJcy/omnibot.git"
+  }
+}

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" role="img" aria-label="Omnibot asset logo">
+  <rect width="96" height="96" rx="12" fill="#eef4ff"/>
+  <circle cx="48" cy="48" r="28" fill="#2463eb"/>
+  <path d="M32 50h32M48 34v32" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
+</svg>

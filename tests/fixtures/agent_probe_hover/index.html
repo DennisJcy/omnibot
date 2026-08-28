@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Agent Hover Probe</title>
+  <style>
+    body { font-family: sans-serif; margin: 32px; }
+    #hover-target { display: inline-block; padding: 18px 28px; border: 1px solid #558; }
+    #tooltip { display: none; margin-top: 20px; }
+    #tooltip.visible { display: block; }
+  </style>
+</head>
+<body>
+  <h1>Agent Hover Probe</h1>
+  <div id="hover-target" aria-label="Hover target">Hover target</div>
+  <p id="tooltip">tooltip hidden</p>
+  <script>
+    const target = document.getElementById('hover-target');
+    const tooltip = document.getElementById('tooltip');
+    target.addEventListener('mouseenter', () => {
+      tooltip.textContent = 'tooltip ready';
+      tooltip.classList.add('visible');
+    });
+  </script>
+</body>
+</html>

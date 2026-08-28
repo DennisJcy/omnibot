@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Agent Dialog Probe</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 2rem; }
+    button { display: block; margin: 0.75rem 0; padding: 0.5rem 0.75rem; }
+    #status { margin-top: 1rem; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <h1>Agent Dialog Probe</h1>
+  <button id="confirm-btn">Open confirm dialog</button>
+  <button id="prompt-btn">Open prompt dialog</button>
+  <button id="alert-btn">Open alert dialog</button>
+  <div id="status" data-confirm="" data-prompt="" data-alert="">idle</div>
+
+  <script>
+    const status = document.querySelector('#status');
+
+    document.querySelector('#confirm-btn').addEventListener('click', () => {
+      const result = window.confirm('Agent confirm?');
+      status.textContent = `confirm ${result}`;
+      status.dataset.confirm = String(result);
+    });
+
+    document.querySelector('#prompt-btn').addEventListener('click', () => {
+      const result = window.prompt('Agent prompt?', 'default text');
+      status.textContent = `prompt ${result}`;
+      status.dataset.prompt = String(result);
+    });
+
+    document.querySelector('#alert-btn').addEventListener('click', () => {
+      window.alert('Agent alert!');
+      status.textContent = 'alert closed';
+      status.dataset.alert = 'closed';
+    });
+  </script>
+</body>
+</html>

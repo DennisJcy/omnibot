@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Agent DOM CUA Probe</title>
+  <style>
+    #scrollbox { width: 220px; height: 90px; overflow: auto; border: 2px solid #558; }
+    #scroll-content { height: 500px; padding-top: 400px; }
+    #target { height: 40px; background: #e8f0ff; }
+  </style>
+</head>
+<body>
+  <button id="dbl">Double action</button>
+  <div id="status">click=0; dbl=0</div>
+  <div id="scrollbox" tabindex="0" aria-label="Scroll box">
+    <div id="scroll-content"><div id="target">Scroll target</div></div>
+  </div>
+  <script>
+    let clickCount = 0;
+    let dblCount = 0;
+    const status = document.querySelector('#status');
+    const render = () => status.textContent = 'click=' + clickCount + '; dbl=' + dblCount;
+    const button = document.querySelector('#dbl');
+    button.addEventListener('click', () => { clickCount += 1; render(); });
+    button.addEventListener('dblclick', () => { dblCount += 1; render(); });
+    render();
+  </script>
+</body>
+</html>

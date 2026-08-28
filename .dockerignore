@@ -1,0 +1,57 @@
+# .dockerignore — exclude files not needed inside the build container.
+# This keeps the Docker build context small and avoids invalidating the
+# COPY layer cache when unrelated files change.
+
+# Version control
+.git
+.gitignore
+
+# Build artifacts
+dist/
+build/
+*.dist/
+*.build/
+
+# npm packages (binaries are gitignored and huge)
+npm-packages/*/bin/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.eggs/
+.venv/
+venv/
+.uv/
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS metadata
+.DS_Store
+._*
+Thumbs.db
+
+# Tests / reports (not needed for the build itself)
+tests/
+tests/reports/
+
+# Docs (skills .md files are needed by the build via --include-data-dir)
+docs/
+AGENTS.md
+CONTRIBUTING.md
+CHANGELOG.md
+LICENSE
+README.md
+
+# CI (deleted workflows)
+.github/
+
+# Scripts not used by the Docker build
+scripts/patch_nuitka_windows.py
+scripts/publish.sh

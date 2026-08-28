@@ -1,0 +1,137 @@
+{
+  "ext_name": {
+    "message": "omnibot"
+  },
+  "ext_description": {
+    "message": "LLM 浏览器自动化助手"
+  },
+  "ext_subtitle": {
+    "message": "LLM 浏览器自动化"
+  },
+  "connected": {
+    "message": "已连接"
+  },
+  "disconnected": {
+    "message": "未连接"
+  },
+  "port_label": {
+    "message": "端口 $port$",
+    "placeholders": {
+      "port": {
+        "content": "$1"
+      }
+    }
+  },
+  "reconnect": {
+    "message": "🔄 重新连接"
+  },
+  "help_docs": {
+    "message": "? 帮助文档"
+  },
+  "err_comm_failed": {
+    "message": "通信失败"
+  },
+  "lang_label": {
+    "message": "语言"
+  },
+  "help_title": {
+    "message": "omnibot 帮助"
+  },
+  "help_intro": {
+    "message": "LLM 浏览器自动化助手，让 AI 操控你的浏览器完成各种任务。omnibot 通过本地 CLI 服务连接 LLM 客户端与你的真实浏览器，实现网页浏览、数据提取、表单填写等自动化操作。"
+  },
+  "help_official_site": {
+    "message": "官方网站："
+  },
+  "help_toc": {
+    "message": "目录"
+  },
+  "help_quick_start": {
+    "message": "快速开始"
+  },
+  "help_install_cli": {
+    "message": "1. 安装 CLI 服务"
+  },
+  "help_install_cli_desc": {
+    "message": "omnibot 以本地 CLI 服务方式运行，LLM 客户端会自动启动它。安装 npm 包（自动检测平台）："
+  },
+  "help_install_cli_tip": {
+    "message": "安装完成后直接使用 omnibot 命令启动服务。使用 omnibot doctor 检查服务状态。"
+  },
+  "help_install_ext": {
+    "message": "2. 安装浏览器扩展"
+  },
+  "help_install_ext_desc": {
+    "message": "如果你正在阅读此帮助文档，说明浏览器扩展已经安装好了。如果没有安装，请从 Chrome 应用商店安装。"
+  },
+  "help_install_skills": {
+    "message": "4. 安装智能体技能"
+  },
+  "help_install_skills_desc": {
+    "message": "omnibot 通过 skills 为不同智能体提供浏览器操作能力。安装 CLI 服务后，使用 omnibot skills install 命令为你的智能体安装对应技能："
+  },
+  "help_skills_tip": {
+    "message": "安装技能后，智能体将自动获得浏览器页面读取、点击、导航等操作能力，无需额外配置。"
+  },
+  "help_skill_install_title": {
+    "message": "$agent$ 技能安装",
+    "placeholders": {
+      "agent": {
+        "content": "$1"
+      }
+    }
+  },
+  "help_hermes_profile_note": {
+    "message": "需要指定 profile（使用 hermes profile list 查看可用 profile）："
+  },
+  "help_openclaw_note": {
+    "message": "技能将安装至 ~/.openclaw/skills/，OpenClaw 启动时自动加载。"
+  },
+  "help_workbuddy_note": {
+    "message": "技能将安装至 ~/.workbuddy/skills/。启动 WorkBuddy 后即可使用浏览器自动化能力。"
+  },
+  "help_trae_note": {
+    "message": "技能将安装至 ~/.trae/skills/（国际版）或 ~/.trae-cn/skills/（国内版），Trae 启动时自动加载。"
+  },
+  "help_skill_auto_load": {
+    "message": "安装后 $agent$ 会自动加载 omnibot 技能，获得浏览器自动化能力。",
+    "placeholders": {
+      "agent": {
+        "content": "$1"
+      }
+    }
+  },
+  "help_connection_title": {
+    "message": "连接状态说明"
+  },
+  "help_connection_desc": {
+    "message": "弹窗顶部显示连接状态："
+  },
+  "help_conn_green": {
+    "message": "🟢 已连接 — 扩展正常连接到 CLI 服务"
+  },
+  "help_conn_red": {
+    "message": "🔴 未连接 — CLI 服务未启动或端口不可达"
+  },
+  "help_conn_troubleshoot": {
+    "message": "如显示未连接，请确认 CLI 服务已启动，然后点击 重新连接。"
+  },
+  "help_faq_title": {
+    "message": "常见问题"
+  },
+  "help_faq_q1": {
+    "message": "Q: 扩展显示\"未连接\"？"
+  },
+  "help_faq_a1": {
+    "message": "A: 确保 CLI 服务已启动。运行 omnibot doctor 检查状态，等待服务启动后再点击\"重新连接\"。"
+  },
+  "help_faq_q4": {
+    "message": "Q: 试用到期后怎么办？"
+  },
+  "help_faq_q2": {
+    "message": "Q: 支持哪些浏览器？"
+  },
+  "help_faq_a2": {
+    "message": "A: Chromium 内核浏览器（Chrome、Edge、Brave 等）。"
+  }
+}

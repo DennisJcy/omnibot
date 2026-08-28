@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Agent Isolation Probe</title>
+  <style>
+    body { font-family: sans-serif; margin: 32px; }
+    label, button { display: block; margin: 12px 0; }
+    #status { margin-top: 20px; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <h1>Agent Isolation Probe</h1>
+  <div id="lane"></div>
+  <label>Message <input id="message" aria-label="Message" placeholder="message"></label>
+  <button id="increment">Add one</button>
+  <button id="save">Save message</button>
+  <div id="status"></div>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const lane = params.get('lane') || 'unknown';
+    const state = { lane, count: 0, message: '' };
+    const laneEl = document.getElementById('lane');
+    const status = document.getElementById('status');
+    const render = () => {
+      laneEl.textContent = `lane=${state.lane}`;
+      status.textContent = `lane=${state.lane}; count=${state.count}; message=${state.message || '-'}`;
+      document.title = `Isolation ${state.lane}`;
+    };
+    document.getElementById('increment').addEventListener('click', () => {
+      state.count += 1;
+      render();
+    });
+    document.getElementById('save').addEventListener('click', () => {
+      state.message = document.getElementById('message').value;
+      render();
+    });
+    render();
+  </script>
+</body>
+</html>

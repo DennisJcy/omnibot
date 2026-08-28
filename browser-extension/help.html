@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>omnibot Help</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{display:flex;min-height:100vh;font:15px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#1a1a2e;background:#fafbfc}
+.sidebar{width:220px;background:#fff;border-right:1px solid #e5e7eb;padding:20px 0;position:fixed;top:0;left:0;bottom:0;overflow-y:auto}
+.sidebar h2{font-size:14px;font-weight:600;padding:0 16px;margin-bottom:12px;color:#6b7280}
+.sidebar a{display:block;padding:8px 16px;color:#374151;text-decoration:none;font-size:14px;border-left:3px solid transparent;transition:all .15s}
+.sidebar a:hover{background:#f3f4f6}
+.sidebar a.active{border-left-color:#4f46e5;background:#eef2ff;color:#4f46e5;font-weight:500}
+.sidebar .sub{padding-left:32px;font-size:13px}
+.main{margin-left:220px;flex:1;padding:32px 40px;max-width:800px}
+h1{font-size:28px;font-weight:700;margin-bottom:8px;color:#111827}
+h2{font-size:22px;font-weight:600;margin:32px 0 12px;color:#4f46e5;padding-top:16px;border-top:1px solid #e5e7eb}
+h3{font-size:17px;font-weight:600;margin:20px 0 8px;color:#374151}
+p{margin:8px 0;color:#444}
+code{background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:13px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+pre{background:#1e293b;color:#e2e8f0;padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0;font-size:13px;line-height:1.6}
+pre code{background:none;padding:0;color:inherit}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;padding:8px 0 8px 36px;position:relative}
+.steps li::before{content:counter(s);position:absolute;left:0;top:8px;width:24px;height:24px;border-radius:50%;background:#4f46e5;color:#fff;text-align:center;line-height:24px;font-size:13px;font-weight:600}
+kbd{background:#e2e8f0;padding:2px 8px;border-radius:4px;border:1px solid #cbd5e1;font-size:13px;font-family:inherit}
+.tip{background:#f0f9ff;border-left:4px solid #3b82f6;padding:12px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:14px}
+.warn{background:#fffbeb;border-left:4px solid #f59e0b;padding:12px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:14px}
+.tabs{display:flex;gap:4px;margin:12px 0 0;border-bottom:2px solid #e5e7eb;position:relative;z-index:1}
+.tab{padding:8px 16px;background:none;border:none;cursor:pointer;font-size:14px;color:#6b7280;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s}
+.tab.active{color:#4f46e5;border-bottom-color:#4f46e5;font-weight:500}
+.tab-content{display:none;padding:16px 0}
+.tab-content.active{display:block}
+.help-lang-bar{position:fixed;top:12px;right:24px;z-index:10}
+.help-lang-bar select{height:28px;border:1px solid #d1d5db;border-radius:6px;font:500 12px/1 -apple-system,sans-serif;color:#555;background:#fff;cursor:pointer;padding:0 8px}
+@media(max-width:768px){.sidebar{display:none}.main{margin-left:0;padding:20px}}
+</style>
+</head>
+<body>
+
+<div class="help-lang-bar">
+  <select id="helpLangSelect">
+    <option value="zh_CN">中文</option>
+    <option value="en">English</option>
+  </select>
+</div>
+
+<nav class="sidebar">
+  <h2 data-i18n="help_toc"></h2>
+  <a href="#intro" data-i18n="help_title"></a>
+  <a href="#quick-start" data-i18n="help_quick_start"></a>
+  <a href="#install-cli" class="sub" data-i18n="help_install_cli"></a>
+  <a href="#install-ext" class="sub" data-i18n="help_install_ext"></a>
+  <a href="#install-skills" class="sub" data-i18n="help_install_skills"></a>
+   <a href="#install-skills" class="sub tab-link" data-tab="opencode" style="padding-left:48px">- OpenCode</a>
+   <a href="#install-skills" class="sub tab-link" data-tab="hermes" style="padding-left:48px">- Hermes</a>
+   <a href="#install-skills" class="sub tab-link" data-tab="claude" style="padding-left:48px">- Claude Code</a>
+   <a href="#install-skills" class="sub tab-link" data-tab="codex" style="padding-left:48px">- Codex</a>
+   <a href="#install-skills" class="sub tab-link" data-tab="openclaw" style="padding-left:48px">- OpenClaw</a>
+   <a href="#install-skills" class="sub tab-link" data-tab="workbuddy" style="padding-left:48px">- WorkBuddy</a>
+   <a href="#install-skills" class="sub tab-link" data-tab="trae" style="padding-left:48px">- Trae</a>
+  <a href="#connection" data-i18n="help_connection_title"></a>
+  <a href="#faq" data-i18n="help_faq_title"></a>
+</nav>
+
+<div class="main">
+
+<h1 id="intro" data-i18n="help_title"></h1>
+<p data-i18n="help_intro"></p>
+<p><span data-i18n="help_official_site"></span><a href="https://omnibot.asia/" target="_blank">https://omnibot.asia/</a></p>
+
+<h2 id="quick-start" data-i18n="help_quick_start"></h2>
+
+<h3 id="install-cli" data-i18n="help_install_cli"></h3>
+<p data-i18n="help_install_cli_desc"></p>
+<pre><code>npm install -g @omniaibot/omnibot</code></pre>
+<div class="tip" data-i18n="help_install_cli_tip"></div>
+
+<h3 id="install-ext" data-i18n="help_install_ext"></h3>
+<p data-i18n="help_install_ext_desc"></p>
+
+<h3 id="install-skills" data-i18n="help_install_skills"></h3>
+<p data-i18n="help_install_skills_desc"></p>
+
+<div class="tabs" id="skills-tabs">
+  <button class="tab active" data-group="skills-tabs" data-tab="opencode">OpenCode</button>
+  <button class="tab" data-group="skills-tabs" data-tab="hermes">Hermes</button>
+  <button class="tab" data-group="skills-tabs" data-tab="claude">Claude Code</button>
+  <button class="tab" data-group="skills-tabs" data-tab="codex">Codex</button>
+  <button class="tab" data-group="skills-tabs" data-tab="openclaw">OpenClaw</button>
+  <button class="tab" data-group="skills-tabs" data-tab="workbuddy">WorkBuddy</button>
+  <button class="tab" data-group="skills-tabs" data-tab="trae">Trae</button>
+</div>
+
+<div id="tab-opencode" class="tab-content active">
+<h4 data-i18n="help_skill_install_title" data-i18n-arg="OpenCode"></h4>
+<pre><code>omnibot skills install --agent opencode</code></pre>
+<p data-i18n="help_skill_auto_load" data-i18n-arg="OpenCode"></p>
+</div>
+
+<div id="tab-hermes" class="tab-content">
+<h4 data-i18n="help_skill_install_title" data-i18n-arg="Hermes"></h4>
+<p data-i18n="help_hermes_profile_note"></p>
+<pre><code>omnibot skills install --agent hermes --profile nuwa</code></pre>
+</div>
+
+<div id="tab-claude" class="tab-content">
+<h4 data-i18n="help_skill_install_title" data-i18n-arg="Claude Code"></h4>
+<pre><code>omnibot skills install --agent claude</code></pre>
+<p data-i18n="help_skill_auto_load" data-i18n-arg="Claude Code"></p>
+</div>
+
+<div id="tab-codex" class="tab-content">
+<h4 data-i18n="help_skill_install_title" data-i18n-arg="Codex"></h4>
+<pre><code>omnibot skills install --agent codex</code></pre>
+<p data-i18n="help_skill_auto_load" data-i18n-arg="Codex"></p>
+</div>
+
+<div id="tab-openclaw" class="tab-content">
+<h4 data-i18n="help_skill_install_title" data-i18n-arg="OpenClaw"></h4>
+<pre><code>omnibot skills install --agent openclaw</code></pre>
+<p data-i18n="help_openclaw_note"></p>
+</div>
+
+<div id="tab-workbuddy" class="tab-content">
+<h4 data-i18n="help_skill_install_title" data-i18n-arg="WorkBuddy"></h4>
+<pre><code>omnibot skills install --agent workbuddy</code></pre>
+<p data-i18n="help_workbuddy_note"></p>
+</div>
+
+<div id="tab-trae" class="tab-content">
+<h4 data-i18n="help_skill_install_title" data-i18n-arg="Trae"></h4>
+<pre><code>omnibot skills install --agent trae</code></pre>
+<p data-i18n="help_trae_note"></p>
+</div>
+
+<div class="tip" data-i18n="help_skills_tip"></div>
+
+<h2 id="connection" data-i18n="help_connection_title"></h2>
+<p data-i18n="help_connection_desc"></p>
+<ul>
+  <li><strong data-i18n="help_conn_green"></strong></li>
+  <li><strong data-i18n="help_conn_red"></strong></li>
+</ul>
+<p data-i18n="help_conn_troubleshoot"></p>
+
+<h2 id="faq" data-i18n="help_faq_title"></h2>
+<p><strong data-i18n="help_faq_q1"></strong><br><span data-i18n="help_faq_a1"></span></p>
+<p><strong data-i18n="help_faq_q2"></strong><br><span data-i18n="help_faq_a2"></span></p>
+
+</div>
+
+<script src="help.js"></script>
+</body>
+</html>

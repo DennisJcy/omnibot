@@ -1,0 +1,40 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ring" x1="96" y1="80" x2="416" y2="448">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+
+    <linearGradient id="blue" x1="256" y1="176" x2="256" y2="456">
+      <stop offset="0%" stop-color="#5B7CFF"/>
+      <stop offset="100%" stop-color="#2554FF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Open O ring, true center at 256,256 -->
+  <path
+    d="M164 406
+       A176 176 0 1 1 348 406"
+    stroke="url(#ring)"
+    stroke-width="72"
+    stroke-linecap="round"
+  />
+
+  <!-- i dot -->
+  <circle
+    cx="256"
+    cy="184"
+    r="28"
+    fill="url(#blue)"
+  />
+
+  <!-- i stem -->
+  <rect
+    x="230"
+    y="228"
+    width="52"
+    height="228"
+    rx="26"
+    fill="url(#blue)"
+  />
+</svg>

@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head><meta charset="utf-8"><title>Read Edge Links</title></head>
+  <body>
+    <main>
+      <h1>Read Edge Links</h1>
+      <p>Only navigable links should be returned to the agent.</p>
+      <a href="http://">Broken scheme only</a>
+      <a href="https:///missing-host">Broken host</a>
+      <a href="//127.0.0.1:64411/protocol.html?from=edge#ok">Protocol Relative Destination</a>
+      <a href=" ./relative.html?from=edge ">Whitespace Relative Destination</a>
+      <a href="#local">Local Fragment</a>
+      <a href="javascript:void(0)">Not Navigable</a>
+      <p id="local">local anchor</p>
+    </main>
+  </body>
+</html>

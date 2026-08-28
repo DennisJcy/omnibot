@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Frame Probe Host</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        margin: 32px;
+      }
+      iframe {
+        border: 1px solid #888;
+        height: 240px;
+        width: 520px;
+      }
+      #host-status {
+        margin: 16px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Frame Probe Host</h1>
+    <p id="host-status">host idle</p>
+    <iframe id="payment-frame" name="payment-frame" src="./child.html" title="Payment Frame"></iframe>
+    <script>
+      window.addEventListener("message", (event) => {
+        if (event.data && event.data.type === "frame-probe") {
+          document.querySelector("#host-status").textContent = `host received ${event.data.value}`;
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Agent Find Probe</title></head>
+<body>
+  <h1>Find Probe</h1>
+  <button class="item" data-key="alpha"><span>Alpha item</span></button>
+  <button class="item" data-key="beta"><span>Beta item</span></button>
+  <div role="status" id="status">idle</div>
+  <script>
+    document.querySelectorAll('.item').forEach((button) => {
+      button.addEventListener('click', () => {
+        document.querySelector('#status').textContent = 'clicked:' + button.dataset.key;
+      });
+    });
+  </script>
+</body>
+</html>

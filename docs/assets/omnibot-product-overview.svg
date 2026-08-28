@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Omnibot product overview</title>
+  <desc id="desc">AI agents use the Omnibot CLI and local daemon to observe, operate, and debug a user's real Chromium browser.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="0.52" stop-color="#eef6ff"/>
+      <stop offset="1" stop-color="#f4fff8"/>
+    </linearGradient>
+    <linearGradient id="primary" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2563eb"/>
+      <stop offset="1" stop-color="#059669"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.13"/>
+    </filter>
+    <style>
+      .label { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .muted { fill: #475569; }
+      .small { font-size: 18px; }
+      .tiny { font-size: 15px; }
+      .title { font-size: 42px; font-weight: 760; letter-spacing: 0; }
+      .card-title { font-size: 24px; font-weight: 720; letter-spacing: 0; }
+      .chip { font-size: 15px; font-weight: 650; letter-spacing: 0; }
+      .card { fill: #ffffff; stroke: #dbeafe; stroke-width: 1.5; filter: url(#shadow); }
+      .soft { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.2; }
+      .line { stroke: #2563eb; stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .dash { stroke: #94a3b8; stroke-width: 2; stroke-dasharray: 8 8; fill: none; stroke-linecap: round; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="675" rx="28" fill="url(#bg)"/>
+  <circle cx="1050" cy="90" r="72" fill="#d1fae5" opacity="0.6"/>
+  <circle cx="150" cy="590" r="88" fill="#dbeafe" opacity="0.62"/>
+
+  <text class="label title" x="72" y="82">Omnibot connects agents to the browser people already use</text>
+  <text class="label muted small" x="74" y="119">Real tabs, real login state, explicit targeting, and evidence-first browser operation through a local daemon.</text>
+
+  <g transform="translate(72 178)">
+    <rect class="card" x="0" y="0" width="250" height="318" rx="18"/>
+    <rect x="28" y="28" width="88" height="34" rx="17" fill="#dbeafe"/>
+    <text class="label chip" x="45" y="51">Agents</text>
+    <text class="label card-title" x="28" y="98">LLM clients</text>
+    <text class="label muted tiny" x="28" y="132">Codex, Claude Code,</text>
+    <text class="label muted tiny" x="28" y="156">Hermes, OpenCode,</text>
+    <text class="label muted tiny" x="28" y="180">and custom agents.</text>
+    <rect class="soft" x="28" y="220" width="194" height="48" rx="12"/>
+    <text class="label tiny" x="48" y="250">Observe -> Act -> Verify</text>
+  </g>
+
+  <path class="line" d="M336 337 C374 337 386 337 424 337"/>
+  <path class="line" d="M410 324 L426 337 L410 350"/>
+
+  <g transform="translate(430 156)">
+    <rect class="card" x="0" y="0" width="340" height="362" rx="20"/>
+    <rect x="30" y="28" width="130" height="34" rx="17" fill="#dcfce7"/>
+    <text class="label chip" x="48" y="51">Local runtime</text>
+    <text class="label card-title" x="30" y="100">Omnibot CLI + daemon</text>
+    <text class="label muted tiny" x="30" y="134">Agent-friendly stdout, diagnostics</text>
+    <text class="label muted tiny" x="30" y="158">on stderr, daemon auto-start,</text>
+    <text class="label muted tiny" x="30" y="182">explicit tab IDs, session tokens.</text>
+
+    <rect class="soft" x="30" y="224" width="280" height="42" rx="11"/>
+    <text class="label tiny" x="50" y="250">snapshot refs, semantic find, get/is/wait</text>
+    <rect class="soft" x="30" y="278" width="280" height="42" rx="11"/>
+    <text class="label tiny" x="50" y="304">click, fill, type, upload, navigate</text>
+  </g>
+
+  <path class="line" d="M782 337 C820 337 832 337 870 337"/>
+  <path class="line" d="M856 324 L872 337 L856 350"/>
+
+  <g transform="translate(878 178)">
+    <rect class="card" x="0" y="0" width="250" height="318" rx="18"/>
+    <rect x="28" y="28" width="112" height="34" rx="17" fill="#fef3c7"/>
+    <text class="label chip" x="46" y="51">Real browser</text>
+    <text class="label card-title" x="28" y="98">Chromium tabs</text>
+    <text class="label muted tiny" x="28" y="132">Login state, extensions,</text>
+    <text class="label muted tiny" x="28" y="156">client-side rendering,</text>
+    <text class="label muted tiny" x="28" y="180">dialogs, network, console.</text>
+    <rect class="soft" x="28" y="220" width="194" height="48" rx="12"/>
+    <text class="label tiny" x="52" y="250">WS + HTTP fallback</text>
+  </g>
+
+  <path class="dash" d="M600 526 C600 568 600 584 600 612"/>
+  <path class="line" d="M600 600 L600 614"/>
+
+  <g transform="translate(180 552)">
+    <rect x="0" y="0" width="840" height="76" rx="18" fill="#0f172a" opacity="0.94"/>
+    <text class="label" x="32" y="32" fill="#ffffff" font-size="20" font-weight="720">Product surface today</text>
+    <text class="label" x="32" y="56" fill="#cbd5e1" font-size="16">Read pages, use actionable refs, operate UI, collect screenshots, console, network, dialogs, and fall back through DOM/CUA/CDP.</text>
+    <text class="label" x="612" y="32" fill="#ffffff" font-size="20" font-weight="720">Roadmap</text>
+    <text class="label" x="612" y="56" fill="#cbd5e1" font-size="16">Trace/replay, dedicated profiles, richer archives, observability, and platform expansion.</text>
+  </g>
+</svg>

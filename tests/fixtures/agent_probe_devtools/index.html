@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Devtools Probe</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        margin: 32px;
+      }
+      button {
+        font: inherit;
+        padding: 8px 12px;
+      }
+      #status {
+        margin-top: 16px;
+        white-space: pre-line;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Devtools Probe</h1>
+    <button id="run">Run diagnostics</button>
+    <output id="status">idle</output>
+    <script>
+      const status = document.querySelector("#status");
+      document.querySelector("#run").addEventListener("click", async () => {
+        status.textContent = "running";
+        console.log("agent-devtools-probe: started");
+        const ok = await fetch("./api/status.json").then((response) => response.json());
+        console.warn("agent-devtools-probe: payload", ok);
+        const missing = await fetch("./api/missing.json").then((response) => response.status);
+        console.error("agent-devtools-probe: missing status", missing);
+        status.textContent = `done ${ok.status} ${missing}`;
+      });
+    </script>
+  </body>
+</html>

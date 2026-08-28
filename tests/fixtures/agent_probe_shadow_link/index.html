@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head><meta charset="utf-8"><title>Closed Shadow Link Probe</title></head>
+  <body>
+    <h1>Closed Shadow Link Probe</h1>
+    <closed-link></closed-link>
+    <script>
+      class ClosedLink extends HTMLElement {
+        constructor() {
+          super();
+          const root = this.attachShadow({mode: 'closed'});
+          const link = document.createElement('a');
+          link.href = 'target.html?from=shadow#part';
+          link.textContent = 'Shadow target';
+          root.append(link);
+        }
+      }
+      customElements.define('closed-link', ClosedLink);
+    </script>
+  </body>
+</html>
