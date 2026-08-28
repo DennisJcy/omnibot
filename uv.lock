@@ -348,7 +348,7 @@ sdist = { url = "https://files.pythonhosted.org/packages/e6/2e/9ea398ca1a4fc4589
 
 [[package]]
 name = "omnibot"
-version = "1.6.22"
+version = "1.6.23"
 source = { editable = "." }
 dependencies = [
     { name = "beautifulsoup4" },

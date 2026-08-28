@@ -1,6 +1,6 @@
 {
   "name": "@omniaibot/macos-arm64",
-  "version": "1.6.22",
+  "version": "1.6.23",
   "description": "omnibot executable for macOS ARM64",
   "os": [
     "darwin"

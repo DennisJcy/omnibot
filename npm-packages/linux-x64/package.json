@@ -1,6 +1,6 @@
 {
   "name": "@omniaibot/linux-x64",
-  "version": "1.6.22",
+  "version": "1.6.23",
   "description": "omnibot executable for Linux x64",
   "os": [
     "linux"

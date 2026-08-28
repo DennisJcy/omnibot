@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "omnibot"
-version = "1.6.22"
+version = "1.6.23"
 description = "Local CLI browser automation system that connects agents to a real browser through the omnibot companion extension."
 readme = "README.md"
 requires-python = ">=3.10"

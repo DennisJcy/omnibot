@@ -96,7 +96,7 @@ def _version() -> str:
     try:
         return version("omnibot")
     except Exception:
-        return "1.6.22"
+        return "1.6.23"
 
 
 def _colors() -> dict[str, str]:

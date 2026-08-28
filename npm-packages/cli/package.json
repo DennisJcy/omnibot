@@ -1,14 +1,14 @@
 {
   "name": "@omniaibot/omnibot",
-  "version": "1.6.22",
+  "version": "1.6.23",
   "description": "omnibot CLI and local daemon for real-browser AI agent automation",
   "bin": {
     "omnibot": "bin/omnibot.js"
   },
   "optionalDependencies": {
-    "@omniaibot/linux-x64": "1.6.22",
-    "@omniaibot/macos-arm64": "1.6.22",
-    "@omniaibot/win-x64": "1.6.22"
+    "@omniaibot/linux-x64": "1.6.23",
+    "@omniaibot/macos-arm64": "1.6.23",
+    "@omniaibot/win-x64": "1.6.23"
   },
   "keywords": [
     "browser",
